@@ -1,0 +1,10 @@
+D:\Project\Chess\ChessLibrary\ChessDemo\bin\Debug\ChessDemo.exe.config
+D:\Project\Chess\ChessLibrary\ChessDemo\bin\Debug\ChessDemo.exe
+D:\Project\Chess\ChessLibrary\ChessDemo\bin\Debug\ChessDemo.pdb
+D:\Project\Chess\ChessLibrary\ChessDemo\bin\Debug\ChessLibrary.dll
+D:\Project\Chess\ChessLibrary\ChessDemo\bin\Debug\ChessLibrary.pdb
+D:\Project\Chess\ChessLibrary\ChessDemo\obj\Debug\ChessDemo.csproj.AssemblyReference.cache
+D:\Project\Chess\ChessLibrary\ChessDemo\obj\Debug\ChessDemo.csproj.CoreCompileInputs.cache
+D:\Project\Chess\ChessLibrary\ChessDemo\obj\Debug\ChessDemo.csproj.CopyComplete
+D:\Project\Chess\ChessLibrary\ChessDemo\obj\Debug\ChessDemo.exe
+D:\Project\Chess\ChessLibrary\ChessDemo\obj\Debug\ChessDemo.pdb

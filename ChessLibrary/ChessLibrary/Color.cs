@@ -17,7 +17,7 @@ namespace ChessLibrary
     {
         public static Color FlipColor(this Color color)
         {
-            if (color==Color.black)
+            if (color == Color.black)
             {
                 return Color.white;
             }

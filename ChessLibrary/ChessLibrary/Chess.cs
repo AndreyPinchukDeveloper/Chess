@@ -32,8 +32,9 @@ namespace ChessLibrary
 
         public char GetFigureAt(int x, int y)//that method show where are all figures and pawns right now
         {
-            Position position = new Position();
-
+            Position position = new Position(x,y);
+            Figures f = board.GetFigureAt(position);
+            return f == Figures.none ? '.' : (char)f;
         }
     }
 }

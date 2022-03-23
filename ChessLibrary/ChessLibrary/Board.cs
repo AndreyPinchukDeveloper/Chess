@@ -22,9 +22,34 @@ namespace ChessLibrary
 
         void Init()
         {
-            SetFigureAt(new Position("a1"), Figures.whiteKing);
-            SetFigureAt(new Position("h8"), Figures.blackKing);
-            moveColor = Color.white;
+            string[] parts = fen.Split();
+            if (parts.Length!=6)
+            {
+                return;
+            }
+            InitFigures(parts[0]);
+            moveColor = (parts[1] == "b") ? Color.black : Color.white;
+            moveNumber = int.Parse(parts[5]);
+        }
+
+        private void InitFigures(string data)
+        {
+            for (int i = 8; i >=2; i--)
+            {
+                data = data.Replace(i.ToString(), (i - 1).ToString() + "1");
+            }
+
+            data = data.Replace("1", ".");
+
+            string[] lines = data.Split('/');
+
+            for (int y = 7; y >=0; y--)
+            {
+                for (int x = 0; x < 8; x++)
+                {
+                    figures[x, y] = (Figures)lines[7 - y][x];
+                }
+            }
         }
 
         public Figures GetFigureAt(Position position)
@@ -54,7 +79,27 @@ namespace ChessLibrary
                 next.moveNumber++;
             }
             next.moveColor = moveColor.FlipColor();
+            next.GenerateFEN();
             return next;
-        } 
+        }
+
+        private void GenerateFEN()
+        {
+            return FenFigures() + " " + 
+                (moveColor == Color.white ? "w" : "b") + 
+                " - - 0 " + moveNumber.ToString(); 
+        }
+
+        private string FenFigures()
+        {
+            StringBuilder sb = new StringBuilder();
+            for (int y = 7; y >=0; y--)
+            {
+                for (int x = 0; x < 8; x++)
+                {
+                    sb.Append(figures[x,y]==Figures.none)
+                }
+            }
+        }
     }
 }

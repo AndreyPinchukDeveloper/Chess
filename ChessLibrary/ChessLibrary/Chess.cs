@@ -20,6 +20,7 @@ namespace ChessLibrary
         Chess (Board board)
         {
             this.board = board;
+            this.fen = board.fen;
         }
 
         public Chess Move(string move)
@@ -35,6 +36,22 @@ namespace ChessLibrary
             Position position = new Position(x,y);
             Figures f = board.GetFigureAt(position);
             return f == Figures.none ? '.' : (char)f;
+        }
+    }
+
+    class Moves
+    {
+        FigureMoving fm;
+        Board board;
+        public Moves(Board board)
+        {
+            this.board = board;
+        }
+
+        public bool CanMove(FigureMoving fm)
+        {
+            this.fm = fm;
+            return
         }
     }
 }

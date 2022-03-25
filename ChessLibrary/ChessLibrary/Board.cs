@@ -47,7 +47,7 @@ namespace ChessLibrary
             {
                 for (int x = 0; x < 8; x++)
                 {
-                    figures[x, y] = (Figures)lines[7 - y][x];
+                    figures[x, y] = lines[7-y][x] == '.' ? Figures.none : (Figures)lines[7 - y][x];
                 }
             }
         }
@@ -85,7 +85,7 @@ namespace ChessLibrary
 
         private void GenerateFEN()
         {
-            return FenFigures() + " " + 
+            fen = FenFigures() + " " + 
                 (moveColor == Color.white ? "w" : "b") + 
                 " - - 0 " + moveNumber.ToString(); 
         }
@@ -97,9 +97,19 @@ namespace ChessLibrary
             {
                 for (int x = 0; x < 8; x++)
                 {
-                    sb.Append(figures[x,y]==Figures.none)
+                    sb.Append(figures[x, y] == Figures.none ? '1' : (char)figures[[x, y]);
+                }
+                if (y > 0)
+                {
+                    sb.Append('/');
                 }
             }
+            string eight = "11111111";
+            for (int j = 8; j >=2; j--)
+            {
+                sb.Replace(eight.Substring(0, j), j.ToString());
+            }
+            return sb.ToString();
         }
     }
 }

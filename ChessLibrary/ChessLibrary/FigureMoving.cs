@@ -29,5 +29,14 @@ namespace ChessLibrary
             this.to = new Position(move.Substring(3, 2));
             this.promotion = (move.Length == 6) ? (Figures)move[5] : Figures.none;//ternary operator
         }
+
+        public int DeltaX { get { return to.x - from.x; } }
+        public int DeltaY { get { return to.y - from.y; } }
+
+        public int AbsDeltaX { get { return Math.Abs(DeltaX); } }
+        public int AbsDeltaY { get { return Math.Abs(DeltaY); } }
+
+        public int AbsSignX { get { return Math.Sign(DeltaX); } }
+        public int AbsSignY { get { return Math.Sign(DeltaY); } }
     }
 }

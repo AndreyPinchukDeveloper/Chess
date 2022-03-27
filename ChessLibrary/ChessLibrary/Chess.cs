@@ -11,6 +11,7 @@ namespace ChessLibrary
         public string fen { get; private set; }
         Board board;
         Moves moves;
+        List<FigureMoving> allMoves;
 
         public Chess(string fen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1")//starting position for Chess
         {
@@ -43,7 +44,30 @@ namespace ChessLibrary
             Figures f = board.GetFigureAt(position);
             return f == Figures.none ? '.' : (char)f;
         }
+
+        private void FindAllMoves()
+        {
+            allMoves = new List<FigureMoving>();
+            foreach (FigureOnSquare fs in board.YieldFigures())
+            {
+                foreach (Position to in Position.YieldPositions())
+                {
+                    FigureMoving fm = new FigureMoving(fs, to);
+                    if (moves.CanMove(fm))
+                    {
+                        allMoves.Add(fm);
+                    }
+                }
+            }
+        }
+
+        public List<string> GrtAllMoves()
+        {
+            List<string> list = new List<String>();
+            foreach (FigureMoving fm in allMoves)
+            {
+                list.Add(fm.ToString());
+            }
+        }
     }
-
-
 }

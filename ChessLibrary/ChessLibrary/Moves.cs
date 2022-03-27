@@ -31,40 +31,79 @@ namespace ChessLibrary
                 case Figures.whiteKing:
                 case Figures.blackKing:
                     return CanKingMove();
+
                 case Figures.whiteQueen:
                 case Figures.blackQueen:
-                    break;
+                    return CanQueenMove();
+
                 case Figures.whiteRook:
                 case Figures.blackRook:
-                    break;
+                    return CanRookMove();
+
                 case Figures.whiteBishop:
                 case Figures.blackBishop:
-                    break;
+                    return CanBishopMove();
+
                 case Figures.whiteKnight:
                 case Figures.blackKnight:
                     return CanKnightMove();
+
                 case Figures.whitePawn:
                 case Figures.blackPawn:
-                    break;
-                default:
-                    return false;
+                    return CanPawnMove();
+
+                default:return false;
             }
+        }
+
+        private bool CanStraightMove()
+        {
+            Position at = fm.from;
+            do
+            {
+                at = new Position(at.x + fm.SignX, at.y + fm.SignY);
+                if (at == fm.to)
+                {
+                    return true;
+                }
+            } while (at.OnBoard() && board.GetFigureAt(at) == Figures.none);
+            return false;
+        }
+
+        private bool CanBishopMove()
+        {
+            throw new NotImplementedException();
+        }
+
+        private bool CanPawnMove()
+        {
+            throw new NotImplementedException();
+        }
+
+        private bool CanRookMove()
+        {
+            throw new NotImplementedException();
+        }
+
+        private bool CanQueenMove()
+        {
+            CanStraightMove();
         }
 
         private bool CanKingMove()
         {
             if (fm.AbsDeltaX <= 1 && fm.AbsDeltaY<= 1)
             {
-
+                return true;
             }
+            return false;
         }
 
         private bool CanKnightMove()
         {
-            if (Math.Abs())
-            {
-
-            }
+            if (fm.AbsDeltaX == 1 && fm.AbsDeltaY == 2) return true;
+            if (fm.AbsDeltaX == 2 && fm.AbsDeltaY == 1) return true;
+            return false;
         }
 
         private bool CanMoveTo()

@@ -61,6 +61,17 @@ namespace ChessLibrary
             return Figures.none;
         }
 
+        public IEnumerable<FigureOnSquare> YieldFigures()
+        {
+            foreach (Position position in Position.YieldPositions())
+            {
+                if (GetFigureAt(position).GetColor()== moveColor)
+                {
+                    yield return new FigureOnSquare(GetFigureAt(position), position);
+                }
+            }
+        }
+
         void SetFigureAt(Position position, Figures figure)
         {
             if (position.OnBoard())

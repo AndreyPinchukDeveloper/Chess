@@ -63,11 +63,13 @@ namespace ChessLibrary
 
         public List<string> GrtAllMoves()
         {
+            FindAllMoves();
             List<string> list = new List<String>();
             foreach (FigureMoving fm in allMoves)
             {
                 list.Add(fm.ToString());
             }
+            return list;
         }
     }
 }

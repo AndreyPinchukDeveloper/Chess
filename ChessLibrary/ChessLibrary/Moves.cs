@@ -72,17 +72,73 @@ namespace ChessLibrary
 
         private bool CanBishopMove()
         {
-            throw new NotImplementedException();
+            return (fm.SignX != 0 && fm.SignY != 0) && CanStraightMove();
         }
 
         private bool CanPawnMove()
         {
-            throw new NotImplementedException();
+            if (fm.from.y < 1 || fm.from.y > 6)
+            {
+                return false;
+            }
+            int stepY = fm.figure.GetColor() == ConsoleColor.White ? 1 : -1;
+            return CanPawnGo(stepY) || CanPawnJump(steY) || CanPawnCapture(stepY);
+        }
+
+        private bool CanPawnGo(int stepY)
+        {
+            if (board.GetFigureAt(fm.to) == Figures.none)
+            {
+                if (fm.DeltaX == 0)
+                {
+                    if (fm.DeltaY == stepY)
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+        private bool CanPawnJump(int stepY)
+        {
+            if (board.GetFigureAt(fm.to) == Figures.none)
+            {
+                if (fm.DeltaX == 0)
+                {
+                    if (fm.DeltaY == 2 * stepY)
+                    {
+                        if (fm.from.y == 1 || fm.from.y == 6)
+                        {
+                            if (board.GetFigureAt(new Position(fm.from.x, fm.from.y + stepY)) == Figures.none)
+                            {
+                                return true;
+                            }
+                        }
+                    }
+                }
+            }
+            return false;
+        }
+
+        private bool CanPawnCapture(int stepY)
+        {
+            if (board.GetFigureAt(fm.to) != Figures.none)
+            {
+                if (fm.AbsDeltaX == 1)
+                {
+                    if (fm.DeltaY == stepY)
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
         }
 
         private bool CanRookMove()
         {
-            throw new NotImplementedException();
+            return (fm.SignX == 0 || fm.SignY == 0) && CanStraightMove();
         }
 
         private bool CanQueenMove()

@@ -48,7 +48,7 @@ namespace ChessLibrary
 
         public static bool operator != (Position a, Position b)
         {
-            return (a == b);
+            return !(a == b);
         }
 
         public static IEnumerable<Position> YieldPositions()
@@ -62,6 +62,6 @@ namespace ChessLibrary
             }
         }
 
-        public string Name { get { return ((char)'a' + x).ToString() + (y + 1).ToString(); } }
+        public string Name { get { return ((char)('a' + x)).ToString() + (y + 1).ToString(); } }
     }
 }

@@ -33,6 +33,12 @@ namespace ChessLibrary
             {
                 return this;
             }
+
+            if (board.IsCheckAfterMove(fm))
+            {
+                return this;
+            }
+
             Board nextBoard = board.Move(fm);
             Chess nextChess = new Chess(nextBoard);
             return nextChess;
@@ -53,15 +59,19 @@ namespace ChessLibrary
                 foreach (Position to in Position.YieldPositions())
                 {
                     FigureMoving fm = new FigureMoving(fs, to);
-                    if (moves.CanMove(fm))
+                    if (moves.CanMove(fm))//!!!!!!!!
                     {
-                        allMoves.Add(fm);
+                        if (!board.IsCheckAfterMove(fm))
+                        {
+                            allMoves.Add(fm);
+                        }
+                        
                     }
                 }
             }
         }
 
-        public List<string> GrtAllMoves()
+        public List<string> GetAllMoves()
         {
             FindAllMoves();
             List<string> list = new List<String>();

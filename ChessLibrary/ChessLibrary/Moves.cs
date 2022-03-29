@@ -81,8 +81,8 @@ namespace ChessLibrary
             {
                 return false;
             }
-            int stepY = fm.figure.GetColor() == ConsoleColor.White ? 1 : -1;
-            return CanPawnGo(stepY) || CanPawnJump(steY) || CanPawnCapture(stepY);
+            int stepY = fm.figures.GetColor() == Color.white ? 1 : -1;
+            return CanPawnGo(stepY) || CanPawnJump(stepY) || CanPawnCapture(stepY);
         }
 
         private bool CanPawnGo(int stepY)
@@ -143,7 +143,7 @@ namespace ChessLibrary
 
         private bool CanQueenMove()
         {
-            CanStraightMove();
+            return CanStraightMove();
         }
 
         private bool CanKingMove()
@@ -162,15 +162,15 @@ namespace ChessLibrary
             return false;
         }
 
-        private bool CanMoveTo()
-        {
-            return fm.to.OnBoard() && fm.from != fm.to && 
-                board.GetFigureAt(fm.to).GetColor() != board.moveColor;
-        }
-
         private bool CanMoveFrom()
         {
             return fm.from.OnBoard() && fm.figures.GetColor() == board.moveColor;
+        }
+
+        private bool CanMoveTo()
+        {
+            return fm.to.OnBoard() && fm.from != fm.to &&
+                board.GetFigureAt(fm.to).GetColor() != board.moveColor;
         }
 
     }

@@ -12,16 +12,16 @@ namespace ChessDemo
         static void Main(string[] args)
         {
             Random random = new Random();
-            Chess chess = new Chess();
+            Chess chess = new Chess("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1");
             List<string> list;
             while (true)
             {
                 list = chess.GetAllMoves();
                 Console.WriteLine(chess.fen);
                 Print(ChessToAscii(chess));
-                foreach (string move in list)
+                foreach (string moves in list)
                 {
-                    Console.Write(moves + "\n");
+                    Console.Write(moves + "\t");
                 }
                 Console.WriteLine();
                 Console.Write("> ");
@@ -30,12 +30,11 @@ namespace ChessDemo
                 {
                     break;
                 }
-                if (move = "")
+                if (move == "")
                 {
                     move = list[random.Next(list.Count)];
                 }
                 chess = chess.Move(move);
-                Console.ReadLine();
             }
         }
 

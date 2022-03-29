@@ -108,7 +108,7 @@ namespace ChessLibrary
             {
                 for (int x = 0; x < 8; x++)
                 {
-                    sb.Append(figures[x, y] == Figures.none ? '1' : (char)figures[[x, y]);
+                    sb.Append(figures[x, y] == Figures.none ? '1' : (char)figures[x, y]);
                 }
                 if (y > 0)
                 {
@@ -121,6 +121,47 @@ namespace ChessLibrary
                 sb.Replace(eight.Substring(0, j), j.ToString());
             }
             return sb.ToString();
+        }
+
+        public bool IsCheck()
+        {
+            Board afterTurn = new Board(fen);
+            afterTurn.moveColor = moveColor.FlipColor();
+            return afterTurn.IsKingCaprtured();
+        }
+
+        private bool IsKingCaprtured()
+        {
+            Position enemyKing = FindEnemyKing();
+            Moves moves = new Moves(this);
+            foreach (FigureOnSquare fs in YieldFigures())
+            {
+                FigureMoving fm = new FigureMoving(fs, enemyKing);
+                if (moves.CanMove(fm))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        private Position FindEnemyKing()
+        {
+            Figures enemyKing = moveColor == Color.black ? Figures.whiteKing : Figures.blackKing;
+            foreach (Position position in Position.YieldPositions())
+            {
+                if (GetFigureAt(position) == enemyKing)
+                {
+                    return position;
+                }
+            }
+            return Position.none;
+        }
+
+        public bool IsCheckAfterMove(FigureMoving fm)
+        {
+            Board afterMove = Move(fm);
+            return afterMove.IsKingCaprtured();
         }
     }
 }

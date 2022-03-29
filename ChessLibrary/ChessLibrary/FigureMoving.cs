@@ -27,7 +27,7 @@ namespace ChessLibrary
             this.figures = (Figures)move[0];//here we're using enum
             this.from = new Position(move.Substring(1, 2));
             this.to = new Position(move.Substring(3, 2));
-            this.promotion = (move.Length == 6) ? (Figures)move[5] : Figures.none;//ternary operator
+            this.promotion = (move.Length == 6) ? (Figures)move[5] : Figures.none;
         }
 
         public int DeltaX { get { return to.x - from.x; } }

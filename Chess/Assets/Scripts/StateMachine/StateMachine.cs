@@ -6,7 +6,7 @@ public class StateMachine
 {
     public State CurrentState { get; set; }
 
-    public void Initialize(State StartState)
+    public void Initialize(State StartState)//first condition
     {
         CurrentState = StartState;
         CurrentState.Enter();

@@ -4,16 +4,23 @@ using UnityEngine;
 
 public class Rules : MonoBehaviour
 {
+    DragAndDrop dragAndDrop;
+
+    public Rules()
+    {
+        dragAndDrop = new DragAndDrop();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        dragAndDrop.Action();
     }
 }
 
@@ -29,6 +36,7 @@ class DragAndDrop
 
     State state;
     GameObject item;
+    Vector2 offset;
 
     public DragAndDrop()
     {
@@ -41,17 +49,68 @@ class DragAndDrop
         switch (state)
         {
             case State.none:
-                break;
-            case State.pickup:
+                if (IsMouseButtonPressed())
+                {
+                    PickUp();
+                }
                 break;
             case State.drag:
-                break;
-            case State.drop:
-                break;
-            default:
+                if (IsMouseButtonPressed())
+                {
+                    Drag();
+                }
+                else
+                {
+                    Drop();
+                    return true;
+                }
                 break;
         }
         return false;
     }
 
+    bool IsMouseButtonPressed()
+    {
+        return Input.GetMouseBotton(0);
+    }
+
+    void PickUp()
+    {
+        Vector2 clickPosition = GetClickPosition();
+        Transform clickedItem = GetItemAt(clickPosition);
+        if (clickedItem == null)
+        {
+            return;
+        }
+        item = clickedItem.gameObject;
+        state = State.drag;
+        offset = (Vector2)clickedItem.position - clickPosition;
+        Debug.Log("This is picked up!" + item.name);
+    }
+
+    Vector2 GetClickPosition()
+    {
+        return Camera.main.ScreenToWorldPoint(Input.MousePosition);
+    }
+
+    Transform GetItemAt(Vector2 position)
+    {
+        RaycastHit2D[] figures = Physics2D.RaycastAll(position, position, 0.5f);
+        if (figures.Length == 0)
+        {
+            return null;
+        }
+        return figures[0].transform;
+    }
+
+    void Drag()
+    {
+        item.transform.position = GetClickPosition() + offset;
+    }
+
+    void Drop()
+    {
+        state = State.none;
+        item = null;
+    }
 }

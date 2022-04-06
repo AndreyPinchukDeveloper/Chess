@@ -1,26 +1,55 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using ChessLibrary;
+using System;
 
 public class Rules : MonoBehaviour
 {
     DragAndDrop dragAndDrop;
+    Chess chess;
 
     public Rules()
     {
         dragAndDrop = new DragAndDrop();
+        chess = new Chess();
     }
 
-    // Start is called before the first frame update
     void Start()
     {
 
     }
 
-    // Update is called once per frame
     void Update()
     {
         dragAndDrop.Action();
+    }
+
+    void ShowFigures()
+    {
+        int nr = 0;
+        for (int y = 0; y < 8; y++)
+        {
+            for (int x = 0; x < 8; x++)
+            {
+                string figure = chess.GetFigureAt(x, y).ToString();
+                if (figure == ".")
+                {
+                    continue;
+                }
+                PlaceFigure("box" + nr, figure, x, y);
+                nr++;
+            }
+        }
+        for (; nr < 32; nr++)
+        {
+            PlaceFigure("box" + nr, "q", 9, 9);
+        }
+    }
+
+    private void PlaceFigure(string box, string figure, int x, int y)
+    {
+        Debug.Log(box+ " " + figure + " " + x + y);
     }
 }
 
@@ -71,7 +100,7 @@ class DragAndDrop
 
     bool IsMouseButtonPressed()
     {
-        return Input.GetMouseBotton(0);
+        return Input.GetMouseButton(0);
     }
 
     void PickUp()
@@ -90,7 +119,7 @@ class DragAndDrop
 
     Vector2 GetClickPosition()
     {
-        return Camera.main.ScreenToWorldPoint(Input.MousePosition);
+        return Camera.main.ScreenToWorldPoint(Input.mousePosition);
     }
 
     Transform GetItemAt(Vector2 position)

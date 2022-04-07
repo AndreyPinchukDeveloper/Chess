@@ -6,7 +6,7 @@ public class DragState : State
 {
     private ChosenFigure _chosenFigure;
 
-    public DroState(ChosenFigure chosenFigure)
+    public DragState(ChosenFigure chosenFigure)
     {
         _chosenFigure = chosenFigure;//it's our access to figure's scripts;
     }
@@ -25,9 +25,9 @@ public class DragState : State
 
     public override void Update()
     {
-        base.Udate();
+        base.Update();
         Debug.LogError("I'm dragging that !");
         _chosenFigure.transform.position = new Vector3//connecting a move mechanic while dragging
-            (_chosenFigure.transform.osition.x, _chosenFigure.transform.position.y + 100 * Time.deltaTime);
+            (_chosenFigure.transform.position.x, _chosenFigure.transform.position.y + 100 * Time.deltaTime);
     }
 }

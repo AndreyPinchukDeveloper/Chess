@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
+using TMPro;
 
-public class ChosenFigure : MonoBehavior
+public class ChosenFigure : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _textPlayer;
     public TextMeshProUGUI TextPlayer => _textPlayer;

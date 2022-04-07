@@ -1,6 +1,0 @@
-D:\Project\Chess\ChessLibrary\ChessLibrary\bin\Debug\ChessLibrary.dll
-D:\Project\Chess\ChessLibrary\ChessLibrary\bin\Debug\ChessLibrary.pdb
-D:\Project\Chess\ChessLibrary\ChessLibrary\obj\Debug\ChessLibrary.csproj.AssemblyReference.cache
-D:\Project\Chess\ChessLibrary\ChessLibrary\obj\Debug\ChessLibrary.csproj.CoreCompileInputs.cache
-D:\Project\Chess\ChessLibrary\ChessLibrary\obj\Debug\ChessLibrary.dll
-D:\Project\Chess\ChessLibrary\ChessLibrary\obj\Debug\ChessLibrary.pdb

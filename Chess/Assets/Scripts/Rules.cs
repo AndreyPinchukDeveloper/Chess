@@ -16,7 +16,7 @@ public class Rules : MonoBehaviour
 
     void Start()
     {
-
+        ShowFigures();
     }
 
     void Update()
@@ -49,6 +49,13 @@ public class Rules : MonoBehaviour
     private void PlaceFigure(string box, string figure, int x, int y)
     {
         Debug.Log(box+ " " + figure + " " + x + y);
+        GameObject inputBox = GameObject.Find(box);
+        GameObject inputFigure = GameObject.Find(figure);
+        GameObject inputPoint = GameObject.Find("" + x + y);
+
+        var spriteFigure = inputFigure.GetComponent<SpriteRenderer>();
+        var spriteBox = inputBox.GetComponent<SpriteRenderer>();
+        spriteBox.sprite = spriteFigure.sprite;
     }
 }
 
